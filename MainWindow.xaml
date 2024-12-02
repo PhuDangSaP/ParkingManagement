@@ -1,0 +1,17 @@
+﻿<Window x:Class="ParkingManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkingManagement"
+        mc:Ignorable="d"
+        WindowState="Maximized" 
+        Title="Phầm mềm quản lý bãi giữ xe" >
+    <Grid>
+        <Frame 
+                       Name="Container"
+                       NavigationUIVisibility="Hidden" >
+
+        </Frame>
+    </Grid>
+</Window>
