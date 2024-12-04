@@ -111,5 +111,26 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
             chiTietVTDo.ShowDialog();
             GetListViTriDoOTo();
         }
+        private void BaiDo_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            var filter = Builders<BsonDocument>.Filter.Eq("MaBD", btn.Tag);
+            BsonDocument doc = DatabaseHandler.Instance.GetCollection("BaiDo").Find(filter).FirstOrDefault();
+            BaiDo baiDo = new BaiDo
+            {
+                maBD = doc["MaBD"].AsString,
+                tenBD = doc["TenBD"].AsString,
+                loaiBD = doc["LoaiBD"].AsString,
+                soLuong = doc["SoLuong"].ToInt32(),
+            };
+            ChiTietBaiDo dialog = new ChiTietBaiDo(baiDo);
+            bool? result = dialog.ShowDialog();
+            if (result == true)
+            {
+                GetListBaiDoOto();
+                GetListBaiDoXeMay();
+            }
+
+        }
     }
 }

@@ -103,7 +103,7 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button  Tag="{Binding maBD}" Width="250" Height="100" Margin="10"  Background="LightBlue" Foreground="Black" FontSize="20">
+                                                <Button  Tag="{Binding maBD}" Width="250" Height="100" Margin="10"  Background="LightBlue" Foreground="Black" FontSize="20" Click="BaiDo_Click">
                                                    <StackPanel Orientation="Vertical">
                                                         <TextBlock HorizontalAlignment="Center" Text="{Binding tenBD}"/>
                                                         <StackPanel Orientation="Horizontal" >
