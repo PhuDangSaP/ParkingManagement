@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ParkingManagement.Pages
+namespace ParkingManagement.asset.dialogs
 {
     /// <summary>
-    /// Interaction logic for QuanLyVe.xaml
+    /// Interaction logic for ThemKhachHang.xaml
     /// </summary>
-    public partial class QuanLyVe : Page
+    public partial class ThemKhachHang : Window
     {
-        public QuanLyVe()
+        public ThemKhachHang()
         {
             InitializeComponent();
         }
