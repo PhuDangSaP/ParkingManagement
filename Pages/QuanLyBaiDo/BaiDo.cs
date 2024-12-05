@@ -12,5 +12,11 @@ namespace ParkingManagement
         public string tenBD { get; set; }
         public string loaiBD { get; set; }
         public int soLuong { get; set; }
+        public int soChoDangSuDung { get; set; }
+        public int soChoConTrong { get; set; }
+        public override string ToString()
+        {
+            return tenBD; 
+        }
     }
 }
