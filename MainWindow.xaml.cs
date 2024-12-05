@@ -23,7 +23,7 @@ namespace ParkingManagement
         public MainWindow()
         {
             InitializeComponent();
-        
+           
             Container.Navigate(new System.Uri("Navigator.xaml", UriKind.RelativeOrAbsolute));
         }
     }
