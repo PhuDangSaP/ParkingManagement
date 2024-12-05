@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ParkingManagement.Pages
+namespace ParkingManagement.Pages.QuanLyKhachHang
 {
     /// <summary>
     /// Interaction logic for QuanLyKhachHang.xaml
@@ -40,24 +42,40 @@ namespace ParkingManagement.Pages
         private void LayDsKH()
         {
             DsKH.Clear();
-            KhachHang Kh1 = new KhachHang();
-            KhachHang Kh2 = new KhachHang();
-            KhachHang Kh3 = new KhachHang();
-            KhachHang Kh4 = new KhachHang();
+            //KhachHang Kh1 = new KhachHang();
+            //KhachHang Kh2 = new KhachHang();
+            //KhachHang Kh3 = new KhachHang();
+            //KhachHang Kh4 = new KhachHang();
 
-            Kh1.taoKH("001", "Dang Huu Thang", "000000000000", "Nam", "0933386019", "19/2 Tran Quang Khai", "A304");
-            DsKH.Add(Kh1);
+            //Kh1.taoKH("001", "Dang Huu Thang", "000000000000", "Nam", "0933386019", "19/2 Tran Quang Khai", "A304");
+            //DsKH.Add(Kh1);
 
-            Kh2.taoKH("002", "Nguyen Thi Thanh Hang", "000000000000", "Nu", "0933386019", "19/2 Tran Quang Khai", "A304");
-            DsKH.Add(Kh2);
+            //Kh2.taoKH("002", "Nguyen Thi Thanh Hang", "000000000000", "Nu", "0933386019", "19/2 Tran Quang Khai", "A304");
+            //DsKH.Add(Kh2);
 
-            Kh3.taoKH("003", "Trinh Thi Thu", "000000000000", "Nu", "0933386019", "19/2 Tran Quang Khai", "A304");
-            DsKH.Add(Kh3);
+            //Kh3.taoKH("003", "Trinh Thi Thu", "000000000000", "Nu", "0933386019", "19/2 Tran Quang Khai", "A304");
+            //DsKH.Add(Kh3);
 
-            Kh4.taoKH("004", "Nguyen Van Dong", "000000000000", "Nam", "0933386019", "19/2 Tran Quang Khai", "A304");
-            DsKH.Add(Kh4);
+            //Kh4.taoKH("004", "Nguyen Van Dong", "000000000000", "Nam", "0933386019", "19/2 Tran Quang Khai", "A304");
+            //DsKH.Add(Kh4);
 
-            
+            //listBaiDoOto.Clear();
+            //var filter = Builders<BsonDocument>.Filter.Eq("M", "Oto");
+            List<BsonDocument> list = DatabaseHandler.Instance.GetCollection("KhachHang").Find(new BsonDocument()).ToList();
+            foreach (BsonDocument item in list)
+            {
+                string maKH = item["MaBD"].AsString;
+                string tenKH = item["TenBD"].AsString;
+                string cccd = item["LoaiBD"].AsString;
+                string gioitinh = item["GioiTinh"].AsString;
+                string diachi = item["DiaChi"].AsString;
+                string sdt = item["SDT"].AsString;
+                string maxe = item["MaXe"].AsString;
+               
+
+                DsKH.Add(new KhachHang { MaKH = maKH, TenKH = tenKH, Cccd = cccd, GioiTinh = gioitinh, DiaChi = diachi, MaXe = maxe, Sdt = sdt });
+            }
+
 
         }
 
