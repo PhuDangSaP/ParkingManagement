@@ -23,7 +23,7 @@ namespace ParkingManagement
         public MainWindow()
         {
             InitializeComponent();
-           
+            DatabaseHandler.Instance.Database.ListCollections(); // khởi tạo trc
             Container.Navigate(new System.Uri("Navigator.xaml", UriKind.RelativeOrAbsolute));
         }
     }

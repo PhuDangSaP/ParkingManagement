@@ -6,7 +6,7 @@ namespace ParkingManagement
 {
     class DatabaseHandler
     {
-        private const string connectionString = "mongodb+srv://admin:secure@cluster0.y906h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+        private const string connectionString = "mongodb+srv://admin:secure@cluster0.konqe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
         private static DatabaseHandler instance;
         private readonly MongoClient client;
         private readonly IMongoDatabase database;
