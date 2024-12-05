@@ -28,7 +28,7 @@ namespace ParkingManagement
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            ContentFrame.Navigate(new System.Uri($"Pages/{btn.Tag}.xaml",System.UriKind.Relative));
+            ContentFrame.Navigate(new System.Uri($"Pages/{btn.Tag}/{btn.Tag}.xaml",System.UriKind.Relative));
         }
     }
 }
