@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingManagement.Pages.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,11 @@ namespace ParkingManagement
         {
             var btn = sender as Button;
             ContentFrame.Navigate(new System.Uri($"Pages/{btn.Tag}/{btn.Tag}.xaml",System.UriKind.Relative));
+        }
+        private void UserInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            ThongTinNhanVien dialog = new ThongTinNhanVien();
+            dialog.ShowDialog();
         }
     }
 }

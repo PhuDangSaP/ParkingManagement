@@ -70,7 +70,7 @@
                             <TextBlock Text="Báo cáo thống kê" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}" Tag="ThongTinNhanVien" >
+            <Button Style="{StaticResource MenuButton}" Tag="ThongTinNhanVien" Click="UserInfoButton_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                             <TextBlock Text="📋" FontSize="20" Margin="20 0" />
                             <TextBlock Text="Thông tin nhân viên" FontSize="20"></TextBlock>
