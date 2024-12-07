@@ -9,10 +9,10 @@
       Title="QuanLyKhachHang">
 
     <Grid>
-        <Grid x:Name="ThemKhachHang" Background="White" Panel.ZIndex="3" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Height="369">
+        <Grid x:Name="formKH" Background="White" Panel.ZIndex="3" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Height="430">
             <StackPanel Margin="15,0,0,0" >
                 <StackPanel Height="132" Width="345">
-                    <TextBlock TextWrapping="Wrap" Text="NHẬP THÔNG TIN KHÁCH HÀNG" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0,20,10,20"/>
+                    <TextBlock x:Name="tieuDe" TextWrapping="Wrap"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0,20,10,20"/>
                     <TextBlock TextWrapping="Wrap" Text="Họ và tên" HorizontalAlignment="Left"/>
                     <TextBox x:Name="tenKH" TextWrapping="Wrap" Text="Nhập họ tên khách hàng" Width="317" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,0" FontWeight="Thin" GotFocus="tenKH_GotFocus" LostFocus="tenKH_LostFocus"/>
                 </StackPanel>
@@ -39,9 +39,9 @@
                         <TextBox x:Name="maXe" TextWrapping="Wrap" Text="Nhập mã xe" Width="152" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" HorizontalAlignment="Left" Margin="0,5,0,0" GotFocus="maXe_GotFocus" LostFocus="maXe_LostFocus" FontWeight="Thin"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Height="61">
+                <StackPanel Height="98" Margin="0,0,0,5">
                     <TextBlock TextWrapping="Wrap" Text="Địa chỉ" HorizontalAlignment="Left"/>
-                    <TextBox x:Name="dc" TextWrapping="Wrap" Text="Nhập địa chỉ khách hàng" Width="321" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,0" FontWeight="Thin" GotFocus="dc_GotFocus" LostFocus="dc_LostFocus"/>
+                    <TextBox x:Name="dc" TextWrapping="Wrap" Text="Nhập địa chỉ khách hàng" Width="321" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,0" FontWeight="Thin" GotFocus="dc_GotFocus" LostFocus="dc_LostFocus" Height="74"/>
                 </StackPanel>
                 <StackPanel Height="47" Orientation="Horizontal" Width="323" HorizontalAlignment="Left" FlowDirection="RightToLeft">
                     <Button x:Name="LuuKH" Content="Lưu" HorizontalAlignment="Right" FlowDirection="RightToLeft" Margin="0,0,23,0" BorderBrush="#FF0977AA" Background="#FF0977AA" Click="LuuKH_Click" />
@@ -54,35 +54,37 @@
 
             <StackPanel>
                 <Grid Height="160">
-                    <StackPanel Height="50" Margin="10,10,0,90" Orientation="Horizontal">
-                        <Image Height="32" Width="32" Source="/asset/icons/add-user.png"/>
-                        <Label x:Name="ThemKH" Content="Thêm khách hàng mới" VerticalContentAlignment="Center" Foreground="#FF0977AA" Margin="5,0,0,0" MouseDown="ThemKH_MouseDown" FontSize="14" FontWeight="SemiBold"/>
-                        <Image Height="32" Width="32" Source="/asset/icons/delete.png" Margin="50,0,0,0"/>
-                        <Label x:Name="XoaKH" Content="Xóa khách hàng" VerticalContentAlignment="Center" Foreground="Red" MouseDown="XoaKH_MouseDown" FontSize="14" FontWeight="SemiBold"/>
+                    <StackPanel Margin="10,15,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button x:Name="btnThemKH" Content="+  Thêm khách hàng mới " HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF0977AA" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Margin="0,0,30,0" Width="195" Click="btnThemKH_Click"/>
+                        <Button x:Name="btnXoaKH" Content="Xóa khách hàng" Background="#FFE61F1F" Width="135" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnXoaKH_Click"/>
+                       
+
+                      
+
                     </StackPanel>
                     <StackPanel Height="50
-                     " Margin="0,60,0,40" Orientation="Horizontal">
-                        <TextBox x:Name="SearchBox" TextWrapping="Wrap" Width="210" Height="40" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" Text="Nhập mã khách hàng cần tìm" FontWeight="Thin"/>
-                        <Button x:Name="TimKH" Content="⌕ Tìm Khách Hàng" Click="TimKh_Click" Margin="20,0,0,0" Background="#FF0977AA" BorderBrush="{x:Null}" Padding="10,4,16,4"/>
+                     " Margin="0,65,298,45" Orientation="Horizontal">
+                        <TextBox x:Name="SearchBox" TextWrapping="Wrap" Width="360" Height="40" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" Text="Nhập mã khách hàng cần tìm" FontWeight="Thin" TextChanged="SearchBox_TextChanged"/>
+                        <Label x:Name="reload" Content="↻" FontSize="24" FontWeight="ExtraBold" Margin="10,0,0,0" Foreground="#FF0977AA" MouseDown="reload_MouseDown"/>
 
                     </StackPanel>
                 </Grid>
                 <Grid Height="650" Margin="10,0,10,0">
-               
 
 
-                    <DataGrid x:Name="dtDsKH" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" BorderThickness="2,2,2,2" Background="White" Foreground="#E5000000" HeadersVisibility="Column" BorderBrush="#FF0977AA" Panel.ZIndex="1" >
-                       
+
+                    <DataGrid x:Name="dtDsKH" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" BorderThickness="2,2,2,2" Background="White" Foreground="#E5000000" HeadersVisibility="Column" BorderBrush="#FF0977AA" Panel.ZIndex="1" Margin="0,-31,0,31" MouseDoubleClick="dtDsKH_MouseDoubleClick" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserAddRows="False" >
+
                         <DataGrid.CellStyle>
                             <Style
     BasedOn="{StaticResource MaterialDesignDataGridCell}"
     TargetType="{x:Type DataGridCell}">
-    <Style.Triggers>
-        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Style.Triggers>
+                                    <Trigger Property="IsKeyboardFocusWithin" Value="True">
                                         <Setter Property="BorderBrush" Value="Transparent" />
-        </Trigger>
-    </Style.Triggers>
-</Style>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
                         </DataGrid.CellStyle>
 
 
@@ -122,7 +124,10 @@
                 </Grid>
 
             </StackPanel>
-           
+
+
+
+
         </Grid>
 
     </Grid>
