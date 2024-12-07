@@ -1,120 +1,86 @@
-﻿using Microsoft.Win32;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace ParkingManagement.Pages
+namespace ParkingManagement.Pages.QuanLyRaVao
 {
     /// <summary>
     /// Interaction logic for QuanLyRaVao.xaml
     /// </summary>
     public partial class QuanLyRaVao : Page
     {
-        private List<ViTriDo> listViTriDo = new List<ViTriDo>();
-        private List<Xe> listXe = new List<Xe>();
+        private List<ChiTietRaVao> listChiTietRaVao = new List<ChiTietRaVao>();
 
         public QuanLyRaVao()
         {
             InitializeComponent();
-            LoadData();
+            GetListChiTietRaVao();
+            ListChiTietRaVao.ItemsSource = listChiTietRaVao;
         }
 
-        private void LoadData()
+        private void GetListChiTietRaVao()
         {
-            listViTriDo = GetListViTriDo();
-        }
-
-        public string XeVao(string bienSo, string loaiXe)
-        {
-            var viTriTrong = listViTriDo.FirstOrDefault(v => v.trangThai == "Trống");
-            if (viTriTrong == null)
-                return "Không còn chỗ trống.";
-
-            var xe = new Xe
+            listChiTietRaVao.Clear();
+            List<BsonDocument> list = DatabaseHandler.Instance.GetCollection("ChiTietRaVao").Find(new BsonDocument()).ToList();
+            foreach (BsonDocument item in list)
             {
-                BienSo = bienSo,
-                LoaiXe = loaiXe,
-                MaVTD = viTriTrong.maVTD,
-                ThoiGianVao = DateTime.Now
-            };
-            listXe.Add(xe);
-            viTriTrong.trangThai = "Đang sử dụng";
+                string maRV = item["MaRV"].AsString;
+                string maBD = item["MaBD"].AsString;
+                string bienSoXe = item["BienSoXe"].AsString;
+                DateTime thoiGianVao = item["ThoiGianVao"].ToUniversalTime();
+                DateTime? thoiGianRa = item.Contains("ThoiGianRa") ? item["ThoiGianRa"].ToNullableUniversalTime() : null;
 
-            UpdateTrangThaiViTri(viTriTrong.maVTD, "Đang sử dụng");
-            SaveXeVao(xe);
-
-            return $"Xe {bienSo} đã vào bãi tại vị trí {viTriTrong.tenVTD}.";
-        }
-
-        public string XeRa(string bienSo)
-        {
-            var xe = listXe.FirstOrDefault(x => x.BienSo == bienSo);
-            if (xe == null)
-                return "Không tìm thấy xe.";
-
-            var viTriDo = listViTriDo.FirstOrDefault(v => v.maVTD == xe.MaVTD);
-            if (viTriDo != null)
-            {
-                viTriDo.trangThai = "Trống";
-                UpdateTrangThaiViTri(viTriDo.maVTD, "Trống");
+                listChiTietRaVao.Add(new ChiTietRaVao
+                {
+                    maRV = maRV,
+                    maKH = maKH,
+                    bienSoXe = bienSoXe,
+                    thoiGianVao = thoiGianVao,
+                    thoiGianRa = thoiGianRa
+                });
             }
-
-            xe.ThoiGianRa = DateTime.Now;
-            SaveXeRa(xe);
-            listXe.Remove(xe);
-
-            return $"Xe {bienSo} đã rời bãi.";
+            ListChiTietRaVao.Items.Refresh();
         }
 
-        private List<ViTriDo> GetListViTriDo()
+        private void AddRaVao_Click(object sender, RoutedEventArgs e)
         {
-            var list = DatabaseHandler.Instance.GetCollection("ViTriDo").Find(new BsonDocument()).ToList();
-            return list.Select(item => new ViTriDo
+            AddRaVao dialog = new AddRaVao();
+            bool? result = dialog.ShowDialog();
+            if (result == true)
             {
-                maVTD = item["MaVTD"].AsString,
-                maBD = item["MaBD"].AsString,
-                tenVTD = item["TenVTD"].AsString,
-                trangThai = item["TrangThai"].AsString
-            }).ToList();
+                GetListChiTietRaVao();
+            }
         }
 
-        private void UpdateTrangThaiViTri(string maVTD, string trangThai)
+        private void CapNhatThoiGianRa_Click(object sender, RoutedEventArgs e)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("MaVTD", maVTD);
-            var update = Builders<BsonDocument>.Update.Set("TrangThai", trangThai);
-            DatabaseHandler.Instance.GetCollection("ViTriDo").UpdateOne(filter, update);
+            Button btn = sender as Button;
+            string maRV = btn.Tag.ToString();
+
+            var filter = Builders<BsonDocument>.Filter.Eq("MaRV", maRV);
+            var update = Builders<BsonDocument>.Update.Set("ThoiGianRa", DateTime.UtcNow);
+
+            DatabaseHandler.Instance.GetCollection("ChiTietRaVao").UpdateOne(filter, update);
+            MessageBox.Show("Thời gian ra đã được cập nhật.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            GetListChiTietRaVao();
         }
 
-        private void SaveXeVao(Xe xe)
+        private void XoaRaVao_Click(object sender, RoutedEventArgs e)
         {
-            var document = new BsonDocument
-            {
-                { "BienSo", xe.BienSo },
-                { "LoaiXe", xe.LoaiXe },
-                { "MaVTD", xe.MaVTD },
-                { "ThoiGianVao", xe.ThoiGianVao }
-            };
-            DatabaseHandler.Instance.GetCollection("XeVaoRa").InsertOne(document);
-        }
+            Button btn = sender as Button;
+            string maRV = btn.Tag.ToString();
 
-        private void SaveXeRa(Xe xe)
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("BienSo", xe.BienSo);
-            var update = Builders<BsonDocument>.Update.Set("ThoiGianRa", xe.ThoiGianRa);
-            DatabaseHandler.Instance.GetCollection("XeVaoRa").UpdateOne(filter, update);
+            var filter = Builders<BsonDocument>.Filter.Eq("MaRV", maRV);
+            DatabaseHandler.Instance.GetCollection("ChiTietRaVao").DeleteOne(filter);
+
+            MessageBox.Show("Thông tin ra vào đã được xóa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            GetListChiTietRaVao();
         }
     }
 }
