@@ -49,6 +49,40 @@ namespace ParkingManagement.Pages
             }).ToList();
         }
 
-         
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchText = SearchBox.Text.ToLower();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                dgNhanVien.ItemsSource = nhanVien; // Hiển thị toàn bộ danh sách nếu không có từ khóa
+            }
+            else
+            {
+                var filteredList = nhanVien.Where(nv => nv.HoTen.ToLower().Contains(searchText)).ToList();
+                dgNhanVien.ItemsSource = filteredList; // Hiển thị danh sách đã lọc
+            }
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgNhanVien.SelectedItem is NhanVien selectedNhanVien)
+            {
+                var result = MessageBox.Show($"Bạn có chắc chắn muốn xóa nhân viên {selectedNhanVien.HoTen}?", "Xác nhận", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var collection = DatabaseHandler.Instance.GetCollection("NhanVien");
+                    var filter = Builders<BsonDocument>.Filter.Eq("maNV", selectedNhanVien.MaNV);
+
+                    await collection.DeleteOneAsync(filter); // Xóa nhân viên khỏi MongoDB
+                    nhanVien.Remove(selectedNhanVien); // Xóa nhân viên khỏi danh sách hiển thị
+                    dgNhanVien.ItemsSource = nhanVien; // Cập nhật lại DataGrid
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một nhân viên để xóa.", "Thông Báo");
+            }
+        }
     }
 }
