@@ -58,18 +58,19 @@
                             <TextBlock Text="Quản lý khách hàng" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource MenuButton}" Tag="QuanLyNhanVien" Click="NavButton_Click">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
-                            <TextBlock Text="Quản lý nhân viên" FontSize="20"></TextBlock>
-                </StackPanel>
-            </Button>
             <Button Style="{StaticResource MenuButton}" Tag="BaoCaoThongKe" Click="NavButton_Click" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                             <TextBlock Text="📋" FontSize="20" Margin="20 0" />
                             <TextBlock Text="Báo cáo thống kê" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
+            <Button x:Name="QLNVBtn" Style="{StaticResource MenuButton}" Tag="QuanLyNhanVien" Click="NavButton_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <TextBlock Text="Quản lý nhân viên" FontSize="20"></TextBlock>
+                </StackPanel>
+            </Button>
+            
             <Button Style="{StaticResource MenuButton}" Tag="ThongTinNhanVien" Click="UserInfoButton_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                             <TextBlock Text="📋" FontSize="20" Margin="20 0" />

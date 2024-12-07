@@ -18,12 +18,12 @@
             
             <Border Grid.Row="0" CornerRadius="15" Background="#ffffff" Margin="10 10 10 0">
                  <StackPanel Orientation="Horizontal">
-                <Button Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddBaiDo_Click">
+                <Button x:Name="AddBaiDoBtn" Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddBaiDo_Click">
                     <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Thêm bãi đỗ" FontSize="16" Foreground="#00bbf9"></TextBlock>
                     </StackPanel>
                 </Button>
-                    <Button Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddVTD_Click">
+                    <Button x:Name="AddViTriDoBtn" Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddVTD_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Thêm vị trí đỗ" FontSize="16" Foreground="#00bbf9"></TextBlock>
                         </StackPanel>

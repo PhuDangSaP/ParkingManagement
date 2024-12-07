@@ -67,7 +67,7 @@ namespace ParkingManagement.Pages.Login
                 .Set("GioiTinh", GioiTinhCBB.SelectedValue)
                 .Set("DiaChi", DiaChiTB.Text)
                 .Set("SDT", SDTTB.Text)
-                .Set("CCCDTB", CCCDTB.Text)
+                .Set("CCCD", CCCDTB.Text)
                 .Set("TaiKhoan", TaiKhoanTB.Text)
                 .Set("MatKhau", MatKhauTB.Text);
             DatabaseHandler.Instance.GetCollection("NhanVien").UpdateOne(filter, update);

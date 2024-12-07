@@ -24,6 +24,16 @@ namespace ParkingManagement
         public Navigator()
         {
             InitializeComponent();
+            SetPemission();
+        }
+
+        private void SetPemission()
+        {
+            string role = Login.role;
+            if(role.Equals("Nhân viên"))
+            {
+                QLNVBtn.IsEnabled = false;
+            }    
         }
 
         private void NavButton_Click(object sender, RoutedEventArgs e)
