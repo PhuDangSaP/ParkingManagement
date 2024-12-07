@@ -37,7 +37,7 @@ namespace ParkingManagement.Pages.QuanLyRaVao
                 listChiTietRaVao.Add(new ChiTietRaVao
                 {
                     maRV = maRV,
-                    maKH = maKH,
+                    maBD = maBD,
                     bienSoXe = bienSoXe,
                     thoiGianVao = thoiGianVao,
                     thoiGianRa = thoiGianRa
@@ -83,4 +83,6 @@ namespace ParkingManagement.Pages.QuanLyRaVao
             GetListChiTietRaVao();
         }
     }
+
+
 }
