@@ -36,5 +36,12 @@ namespace ParkingManagement
             ThongTinNhanVien dialog = new ThongTinNhanVien();
             dialog.ShowDialog();
         }
+        
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            Login.maNV = null;
+            Login.role = null;
+            NavigationService.Navigate(new System.Uri("Pages/Login/Login.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }

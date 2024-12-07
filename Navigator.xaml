@@ -76,6 +76,9 @@
                             <TextBlock Text="Thông tin nhân viên" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
+                    <Button Style="{StaticResource MenuButton}" Click="SignOut_Click">
+                        <TextBlock  Margin="60 0 0 0" Text="Đăng xuất" FontSize="20"/>
+                    </Button>
         </StackPanel>
             </Grid>
         
