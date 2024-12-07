@@ -8,10 +8,15 @@ namespace ParkingManagement
 {
     public class Xe
     {
+        public void taoXe (string maxe, string bienso, string tenloaixe)
+        {
+            MaXe = maxe;
+            BienSo = bienso;
+            TenLoaiXe = tenloaixe;
+        }
+
+        public string MaXe { get; set; }
         public string BienSo { get; set; }
-        public string LoaiXe { get; set; }
-        public string MaVTD { get; set; }
-        public DateTime ThoiGianVao { get; set; }
-        public DateTime? ThoiGianRa { get; set; }
+        public string TenLoaiXe { get; set; }
     }
 }
