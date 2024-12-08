@@ -31,27 +31,44 @@ namespace ParkingManagement.Pages
         public QuanLyNhanVien()
         {
             InitializeComponent();
-            nhanVien = LoadNhanVien();
+            LoadNhanVien();
         }
-        private List<NhanVien> LoadNhanVien()
+        private void LoadNhanVien()
         {
-            var collection = DatabaseHandler.Instance.GetCollection("NhanViens").Find(new BsonDocument()).ToList();
-            return collection.Select(item => new NhanVien
+            IMongoCollection<BsonDocument> collection = DatabaseHandler.Instance.GetCollection("NhanVien");
+            var nhanVienDocuments = collection.Find(new BsonDocument()).ToList();
+            nhanVien = nhanVienDocuments.Select(item    => new NhanVien
             {
-                maNV = item["maNV"].AsString,
-                hoTen = item["hoTen"].AsString,
-                gioiTinh = item["gioiTinh"].AsString,
-                diaChi = item["diaChi"].AsString,
-                sDT = item["sdt"].AsString,
-                cCCD = item["cccd"].AsString,
-                taiKhoan = item["taiKhoan"].AsString,
-                matKhau = item["matKhau"].AsString,
-                role = item["role"].AsString
+                maNV = item["MaNV"].AsString,
+                hoTen = item["HoTen"].AsString,
+                gioiTinh = item["GioiTinh"].AsString,
+                diaChi = item["DiaChi"].AsString,
+                sDT = item["SDT"].AsString,
+                cCCD = item["CCCD"].AsString,
+                taiKhoan = item["TaiKhoan"].AsString,
+                matKhau = item["MatKhau"].AsString,
+                role = item["Role"].AsString
             }).ToList();
 
-            dgNhanVien.ItemsSource = collection ;
+            dgNhanVien.ItemsSource = nhanVien;
         }
 
+        private void dgNhanVien_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+        private void Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var button = sender as Button;
+            var contextMenu = button?.ContextMenu;
+
+            if (contextMenu != null)
+            {
+                // Hiển thị context menu khi nhấn chuột trái
+                contextMenu.IsOpen = true;
+                e.Handled = true; // Ngăn chặn sự kiện tiếp tục, để tránh các hành vi khác của chuột
+            }
+        }
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchBox.Text.ToLower();
@@ -67,9 +84,26 @@ namespace ParkingManagement.Pages
             }
         }
 
+        private void ShowMenu_Click(object sender, RoutedEventArgs e)
+        {
+            // Kiểm tra xem có nhân viên nào được chọn trong DataGrid
+            if (dgNhanVien.SelectedItem is NhanVien selectedNhanVien)
+            {
+                // Tạo context menu khi chọn nhân viên
+                var contextMenu = (sender as Button).ContextMenu;
+                contextMenu.IsOpen = true;
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một nhân viên để thao tác.", "Thông Báo");
+            }
+        }
+
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (dgNhanVien.SelectedItem is NhanVien selectedNhanVien)
+            var selectedNhanVien = dgNhanVien.SelectedItem as NhanVien;
+
+            if (selectedNhanVien != null)
             {
                 var result = MessageBox.Show($"Bạn có chắc chắn muốn xóa nhân viên {selectedNhanVien.hoTen}?", "Xác nhận", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
@@ -90,7 +124,10 @@ namespace ParkingManagement.Pages
 
         private void ViewDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (dgNhanVien.SelectedItem is NhanVien selectedNhanVien)
+            // Lấy nhân viên đã chọn từ DataGrid
+            var selectedNhanVien = dgNhanVien.SelectedItem as NhanVien;
+
+            if (selectedNhanVien != null)
             {
                 MessageBox.Show($"Chi tiết nhân viên:\n" +
                                 $"Mã NV: {selectedNhanVien.maNV}\n" +
@@ -101,10 +138,6 @@ namespace ParkingManagement.Pages
                                 $"Địa Chỉ: {selectedNhanVien.diaChi}\n" +
                                 $"Tài Khoản: {selectedNhanVien.taiKhoan}\n" +
                                 $"Role: {selectedNhanVien.role}", "Thông Tin Chi Tiết");
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn một nhân viên để xem chi tiết.", "Thông Báo");
             }
         }
 
