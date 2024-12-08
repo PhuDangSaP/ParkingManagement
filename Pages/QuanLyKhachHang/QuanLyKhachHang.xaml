@@ -9,7 +9,7 @@
       Title="QuanLyKhachHang">
 
     <Grid>
-        <Grid x:Name="formKH" Background="White" Panel.ZIndex="3" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Height="430">
+        <Grid x:Name="formKH" Background="White" Panel.ZIndex="3" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Height="499">
             <StackPanel Margin="15,0,0,0" >
                 <StackPanel Height="132" Width="345">
                     <TextBlock x:Name="tieuDe" TextWrapping="Wrap"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0,20,10,20"/>
@@ -35,11 +35,13 @@
                         <TextBox x:Name="sdt" TextWrapping="Wrap" Text="Nhập số điện thoại" Width="157" HorizontalAlignment="Left" Margin="0,5,0,0" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" FontWeight="Thin" GotFocus="sdt_GotFocus" LostFocus="sdt_LostFocus"/>
                     </StackPanel>
                     <StackPanel Height="50" Width="172">
-                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Mã xe"/>
-                        <TextBox x:Name="maXe" TextWrapping="Wrap" Text="Nhập mã xe" Width="152" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" HorizontalAlignment="Left" Margin="0,5,0,0" GotFocus="maXe_GotFocus" LostFocus="maXe_LostFocus" FontWeight="Thin"/>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Biển số"/>
+                        <TextBox x:Name="tbBienSo" TextWrapping="Wrap" Text="Nhập biển số xe" Width="152" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" HorizontalAlignment="Left" Margin="0,5,0,0" GotFocus="maXe_GotFocus" LostFocus="maXe_LostFocus" FontWeight="Thin"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Height="98" Margin="0,0,0,5">
+                <StackPanel Height="168" Margin="0,0,0,5">
+                    <TextBlock TextWrapping="Wrap" Text="Tên loại xe" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tbTenXe" TextWrapping="Wrap" Text="Nhập tên loại xe" Width="321" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,5" FontWeight="Thin" GotFocus="tbTenXe_GotFocus" LostFocus="tbTenXe_LostFocus" Height="30"/>
                     <TextBlock TextWrapping="Wrap" Text="Địa chỉ" HorizontalAlignment="Left"/>
                     <TextBox x:Name="dc" TextWrapping="Wrap" Text="Nhập địa chỉ khách hàng" Width="321" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,0" FontWeight="Thin" GotFocus="dc_GotFocus" LostFocus="dc_LostFocus" Height="74"/>
                 </StackPanel>
@@ -64,8 +66,12 @@
                     </StackPanel>
                     <StackPanel Height="50
                      " Margin="0,65,298,45" Orientation="Horizontal">
-                        <TextBox x:Name="SearchBox" TextWrapping="Wrap" Width="360" Height="40" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" Text="Nhập mã khách hàng cần tìm" FontWeight="Thin" TextChanged="SearchBox_TextChanged"/>
-                        <Label x:Name="reload" Content="↻" FontSize="24" FontWeight="ExtraBold" Margin="10,0,0,0" Foreground="#FF0977AA" MouseDown="reload_MouseDown"/>
+                        <TextBox x:Name="SearchBox" TextWrapping="Wrap" Width="216" Height="40" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" FontWeight="Thin" TextChanged="SearchBox_TextChanged" Text="Nhập thông tin cần tìm"/>
+                        <ComboBox x:Name="KieuTim" Width="169" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="20,0,10,0" SelectedIndex="0" Padding="5,4,5,4" Height="29">
+                            <ComboBoxItem Content="Tìm theo số điện thoại" Tag="1"  />
+                            <ComboBoxItem Content="Tìm theo biển số" Tag="0"  />
+                        </ComboBox>
+                        <Label x:Name="reload" Content="↻" FontSize="24" FontWeight="ExtraBold" Margin="10,0,0,0" Foreground="#FF0977AA" MouseDown="reload_MouseDown" Padding="4,5,4,4"/>
 
                     </StackPanel>
                 </Grid>
@@ -118,7 +124,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mã Xe" Binding="{Binding MaXe}" Width="100"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Biển Số Xe" Binding="{Binding BienSo}" Width="100"  IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

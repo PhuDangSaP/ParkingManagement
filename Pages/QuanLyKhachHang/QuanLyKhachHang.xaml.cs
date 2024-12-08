@@ -25,7 +25,7 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
     public partial class QuanLyKhachHang : Page
     {
         private List<KhachHang>  DsKH = new List<KhachHang>();
-
+     
 
         public QuanLyKhachHang()
         {
@@ -61,10 +61,12 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                 string gioitinh = item["GioiTinh"].AsString;
                 string diachi = item["DiaChi"].AsString;
                 string sdt = item["SDT"].AsString;
-                string maxe = item["MaXe"].AsString;
+                string bien = item["BienSo"].AsString;
+                string tenxe = item["TenLoaiXe"].AsString;
 
 
-                DsKH.Add(new KhachHang { MaKH = maKH, TenKH = tenKH, Cccd = cccd, GioiTinh = gioitinh, DiaChi = diachi, MaXe = maxe, Sdt = sdt });
+
+                DsKH.Add(new KhachHang { MaKH = maKH, TenKH = tenKH, Cccd = cccd, GioiTinh = gioitinh, DiaChi = diachi, BienSo = bien, TenLoaiXe = tenxe, Sdt = sdt });
             }
 
             dtDsKH.ItemsSource = null;
@@ -115,17 +117,17 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
 
         private void maXe_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (maXe.Text == "Nhập mã xe")
-                maXe.Text = string.Empty;
-            maXe.FontWeight = FontWeights.Regular;
+            if (tbBienSo.Text == "Nhập biển số xe")
+                tbBienSo.Text = string.Empty;
+            tbBienSo.FontWeight = FontWeights.Regular;
         }
 
         private void maXe_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (maXe.Text == string.Empty)
+            if (tbBienSo.Text == string.Empty)
             {
-                maXe.Text = "Nhập mã xe";
-                maXe.FontWeight = FontWeights.Thin;
+                tbBienSo.Text = "Nhập biển số xe";
+               tbBienSo.FontWeight = FontWeights.Thin;
 
             }
         }
@@ -147,7 +149,6 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
             {
                 dc.Text = "Nhập địa chỉ khách hàng";
                 
-
             }
         }
 
@@ -176,7 +177,7 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                 var khach = new KhachHang();
 
                 string id = (DsKH.Count + 1).ToString();
-                khach.taoKH(id, tenKH.Text, cccd.Text, gt.Text, sdt.Text, dc.Text, maXe.Text);
+                khach.taoKH(id, tenKH.Text, cccd.Text, gt.Text, sdt.Text, dc.Text, tbBienSo.Text, tbTenXe.Text);
                 if (kiemTraKH(khach))
                 {
                     DsKH.Add(khach);
@@ -189,7 +190,8 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                   {"SDT", sdt.Text },
                     {"GioiTinh", gt.Text },
                       {"DiaChi", dc.Text },
-                {"MaXe", maXe.Text } });
+                {"BienSo", tbBienSo.Text },
+                        {"TenLoaiXe", tbTenXe.Text } });
 
                     LayDsKH();
                     MessageBox.Show("Thêm khách hàng thành công");
@@ -221,7 +223,8 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                   {"SDT", sdt.Text },
                     {"GioiTinh", gt.Text },
                       {"DiaChi", dc.Text },
-                {"MaXe", maXe.Text } });
+                 {"BienSo", tbBienSo.Text },
+                        {"TenLoaiXe", tbTenXe.Text }  });
 
                     LayDsKH();
                     MessageBox.Show("Cập nhật thành công");
@@ -243,7 +246,10 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (SearchBox.Text == "Nhập mã khách hàng cần tìm")
+           
+         
+                
+            if (SearchBox.Text == "Nhập thông tin cần tìm")
                 SearchBox.Text = string.Empty;
             SearchBox.FontWeight = FontWeights.Regular;
         }
@@ -252,7 +258,7 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
         {
             if (SearchBox.Text == string.Empty)
             {
-                SearchBox.Text = "Nhập mã khách hàng cần tìm";
+                SearchBox.Text = "Nhập thông tin cần tìm";
                 
 
             }
@@ -262,22 +268,23 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string search = SearchBox.Text;
-            if(!(string.IsNullOrEmpty(search)||search == "Nhập mã khách hàng cần tìm")) { 
-                List<KhachHang> searchs = DsKH.FindAll(item => item.MaKH.Contains(SearchBox.Text));
+            List<KhachHang> searchs = new List<KhachHang>();
+            
 
-                dtDsKH.ItemsSource = searchs;
+
+
+            if (!(string.IsNullOrEmpty(search)||search == "Nhập thông tin cần tìm")) {
+                if (KieuTim.Text == "Tìm theo số điện thoại") {
+                 dtDsKH.ItemsSource=  DsKH.FindAll(item => item.Sdt.Contains(search));
+                 
+                }
+                else
+                {
+                    dtDsKH.ItemsSource = DsKH.FindAll(item => item.BienSo.Contains(search));
+                    
+                };
+              
             }
-
-
-           
-
-           
-
-
-
-
-
-
 
         }
 
@@ -290,12 +297,14 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
             cccd.FontWeight = FontWeights.Regular;
             sdt.FontWeight = FontWeights.Regular;
             dc.FontWeight = FontWeights.Regular;
-            maXe.FontWeight = FontWeights.Regular;
+            tbBienSo.FontWeight = FontWeights.Regular;
+            tbTenXe.FontWeight = FontWeights.Regular;
             tenKH.Text = "Nhập họ tên khách hàng";
             cccd.Text = "Nhập số CCCD";
             sdt.Text = "Nhập số điện thoại";
             dc.Text = "Nhập địa chỉ khách hàng";
-            maXe.Text = "Nhập mã xe";
+            tbBienSo.Text = "Nhập biển số xe";
+            tbTenXe.Text = "Nhập tên loại xe";
 
 
         }
@@ -312,12 +321,13 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
             cccd.FontWeight = FontWeights.Regular;
             sdt.FontWeight = FontWeights.Regular;
             dc.FontWeight = FontWeights.Regular;
-            maXe.FontWeight = FontWeights.Regular;
+            tbBienSo.FontWeight = FontWeights.Regular;
             tenKH.Text = khach.TenKH;
             cccd.Text = khach.Cccd;
             sdt.Text = khach.Sdt;
             dc.Text = khach.DiaChi;
-            maXe.Text = khach.MaXe;
+            tbBienSo.Text = khach.BienSo;
+            tbTenXe.Text = khach.TenLoaiXe;
             gt.Text = khach.GioiTinh;
         }
 
@@ -356,8 +366,26 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
 
         private void reload_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            SearchBox.Text = string.Empty;
             LayDsKH();
+        }
+
+        private void tbTenXe_GotFocus(object sender, RoutedEventArgs e)
+        {
+        
+
+            if (tbTenXe.Text == "Nhập tên loại xe")
+                tbTenXe.Text = string.Empty;
+        }
+
+        private void tbTenXe_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbTenXe.Text == string.Empty)
+            {
+                tbTenXe.Text = "Nhập tên loại xe";
+
+
+            }
         }
     }
 

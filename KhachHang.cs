@@ -8,7 +8,7 @@ namespace ParkingManagement
 {
    public  class KhachHang
     {
-        public void taoKH(string ma, string ten, string cccd, string gioitinh, string sdt, string diachi, string maxe)
+        public void taoKH(string ma, string ten, string cccd, string gioitinh, string sdt, string diachi, string bien, string tenxe)
         {
             MaKH = ma;
             TenKH = ten;
@@ -16,7 +16,8 @@ namespace ParkingManagement
             GioiTinh = gioitinh;
             Sdt = sdt;
             DiaChi = diachi;
-            MaXe = maxe;
+            BienSo = bien;
+            TenLoaiXe = tenxe;
         }
         public string MaKH { get; set; }
         public string TenKH { get; set; }
@@ -24,7 +25,9 @@ namespace ParkingManagement
         public string GioiTinh { get; set; }
         public string Sdt { get; set; }
         public string DiaChi { get; set; }
-        public string MaXe { get; set; }
+        public string BienSo { get; set; }
+
+        public string TenLoaiXe { get; set; }
 
 
     }
