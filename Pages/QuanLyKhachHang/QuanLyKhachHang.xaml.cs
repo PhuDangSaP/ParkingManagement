@@ -61,12 +61,20 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                 string gioitinh = item["GioiTinh"].AsString;
                 string diachi = item["DiaChi"].AsString;
                 string sdt = item["SDT"].AsString;
-                string bien = item["BienSo"].AsString;
-                string tenxe = item["TenLoaiXe"].AsString;
+                string maxe = item["MaXe"].AsString;
+                string bien = "";
+                string tenxe = "";
 
+                var filter = Builders<BsonDocument>.Filter.Eq("MaXe", maxe );
 
+                List<BsonDocument> find = DatabaseHandler.Instance.GetCollection("Xe").Find(filter).ToList();
+               
+                foreach (BsonDocument result in find) {
+                    bien = result["BienSo"].AsString;
+                    tenxe = result["TenLoaiXe"].AsString;
+                }
 
-                DsKH.Add(new KhachHang { MaKH = maKH, TenKH = tenKH, Cccd = cccd, GioiTinh = gioitinh, DiaChi = diachi, BienSo = bien, TenLoaiXe = tenxe, Sdt = sdt });
+                    DsKH.Add(new KhachHang { MaKH = maKH, TenKH = tenKH, Cccd = cccd, GioiTinh = gioitinh, DiaChi = diachi, BienSo = bien, TenLoaiXe = tenxe, Sdt = sdt });
             }
 
             dtDsKH.ItemsSource = null;
@@ -190,6 +198,11 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                   {"SDT", sdt.Text },
                     {"GioiTinh", gt.Text },
                       {"DiaChi", dc.Text },
+                       {"MaXe", id }
+                 });
+                    await DatabaseHandler.Instance.GetCollection("Xe").InsertOneAsync(new BsonDocument {
+                {"MaXe", id } ,
+               
                 {"BienSo", tbBienSo.Text },
                         {"TenLoaiXe", tbTenXe.Text } });
 
@@ -223,8 +236,8 @@ namespace ParkingManagement.Pages.QuanLyKhachHang
                   {"SDT", sdt.Text },
                     {"GioiTinh", gt.Text },
                       {"DiaChi", dc.Text },
-                 {"BienSo", tbBienSo.Text },
-                        {"TenLoaiXe", tbTenXe.Text }  });
+                        {"MaXe", khach.MaKH }
+                 });
 
                     LayDsKH();
                     MessageBox.Show("Cập nhật thành công");
