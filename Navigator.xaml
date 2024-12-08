@@ -27,58 +27,63 @@
                            Foreground="White"
                                FontSize="16"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
+                               HorizontalAlignment="Center" FontFamily="Castellar"
                            
                               />
+                    
                 </Grid>
 
                 <StackPanel Grid.Row="1" Margin="0 40 0 20" >
             <Button Style="{StaticResource MenuButton}" Tag="QuanLyRaVao" Click="NavButton_Click" >
-                       
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="TransitTransfer" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Quản lý ra vào" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}" Tag="QuanLyBaiDo" Click="NavButton_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="AppleKeyboardCommand" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Quản lý bãi đỗ" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}" Tag="QuanLyVe" Click="NavButton_Click" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="Ticket" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Quản lý vé" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}" Tag="QuanLyKhachHang" Click="NavButton_Click" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="AccountMultiple" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Quản lý khách hàng" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}" Tag="BaoCaoThongKe" Click="NavButton_Click" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="ChartAreaspline" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Báo cáo thống kê" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
             <Button x:Name="QLNVBtn" Style="{StaticResource MenuButton}" Tag="QuanLyNhanVien" Click="NavButton_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="NaturePeople" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Quản lý nhân viên" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
             
             <Button Style="{StaticResource MenuButton}" Tag="ThongTinNhanVien" Click="UserInfoButton_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <TextBlock Text="📋" FontSize="20" Margin="20 0" />
+                            <materialDesign:PackIcon Kind="AccountCircle" Margin="20 0" Height="25" Width="25"/>
                             <TextBlock Text="Thông tin nhân viên" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
                     <Button Style="{StaticResource MenuButton}" Click="SignOut_Click">
-                        <TextBlock  Margin="60 0 0 0" Text="Đăng xuất" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                            <materialDesign:PackIcon Kind="SignOut" Margin="20 0" Height="25" Width="25"/>
+                            <TextBlock  Text="Đăng xuất" FontSize="20"/>
+                        </StackPanel>
+                        
                     </Button>
         </StackPanel>
             </Grid>
