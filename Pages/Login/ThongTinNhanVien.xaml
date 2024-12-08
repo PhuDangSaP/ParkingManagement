@@ -1,0 +1,68 @@
+﻿<Window x:Class="ParkingManagement.Pages.Login.ThongTinNhanVien"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkingManagement.Pages.Login"
+        mc:Ignorable="d"
+        Title="ThongTinNhanVien"         Height="600" Width="430"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Border Background="#b5ecf5" CornerRadius="20" BorderBrush="Transparent" BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Thông tin nhân viên" Style="{StaticResource TitleLabel}"/>
+            <StackPanel Grid.Row="1" Margin="50 10 " Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Mã nhân viên" Style="{StaticResource NormalLabel}" Width="120"></Label>
+                    <TextBox x:Name="MaNVTB" IsReadOnly="True" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 20">
+                    <Label Content="Họ tên" Style="{StaticResource NormalLabel}" Width="120"></Label>
+                    <TextBox x:Name="HoTenTB" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Giới tính" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <ComboBox x:Name="GioiTinhCBB" Width="200"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 20">
+                    <Label Content="Địa chỉ" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <TextBox x:Name="DiaChiTB" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Số điện thoại" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <TextBox x:Name="SDTTB" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 20">
+                    <Label Content="CCCD" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <TextBox x:Name="CCCDTB" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Tài khoản" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <TextBox x:Name="TaiKhoanTB" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 20">
+                    <Label Content="Mật khẩu" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <TextBox x:Name="MatKhauTB" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Vai trò" Style="{StaticResource NormalLabel}"  Width="120"></Label>
+                    <TextBox x:Name="RoleTB" IsReadOnly="True" Style="{StaticResource InputTextBox}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 15">
+                <Button Content="Hủy" Style="{StaticResource CloseButton}" Click="Huy_Click">
+
+                </Button>
+                <Button Content="Lưu" Style="{StaticResource CloseButton}" Margin="20 0" Click="Save_Click" >
+
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

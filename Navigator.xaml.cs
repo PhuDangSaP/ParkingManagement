@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingManagement.Pages.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,12 +24,34 @@ namespace ParkingManagement
         public Navigator()
         {
             InitializeComponent();
+            SetPemission();
+        }
+
+        private void SetPemission()
+        {
+            string role = Login.role;
+            if(role.Equals("Nhân viên"))
+            {
+                QLNVBtn.IsEnabled = false;
+            }    
         }
 
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             ContentFrame.Navigate(new System.Uri($"Pages/{btn.Tag}/{btn.Tag}.xaml",System.UriKind.Relative));
+        }
+        private void UserInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            ThongTinNhanVien dialog = new ThongTinNhanVien();
+            dialog.ShowDialog();
+        }
+        
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            Login.maNV = null;
+            Login.role = null;
+            NavigationService.Navigate(new System.Uri("Pages/Login/Login.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

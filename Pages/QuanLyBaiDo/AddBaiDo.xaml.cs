@@ -30,6 +30,7 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
 
         private void Huy_Click(object sender, RoutedEventArgs e)
         {
+            
             Close();
         }
 
@@ -39,8 +40,10 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                 {"MaBD", MaBaiDoTB.Text } ,
                 { "TenBD", TenBaiDoTB.Text },
                 {"LoaiBD",LoaiBaiDoCBB.SelectedItem.ToString() },
-                {"SoLuong", Convert.ToInt32(SoLuongTB.Text)}
+                {"SoLuong", Convert.ToInt32(SoLuongTB.Text)},
+                {"TrangThai","Sẵn sàng" }
             });
+            MessageBox.Show("Thêm bãi đỗ thành công");
             Close();
         }
     }

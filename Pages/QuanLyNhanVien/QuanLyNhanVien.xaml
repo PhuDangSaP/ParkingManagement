@@ -9,6 +9,88 @@
       Title="QuanLyNhanVien">
 
     <Grid Background="#D4E6EC">
-        <DataGrid x:Name="dgNhanVien" AutoGenerateColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <!-- Header: Thêm nhân viên mới và tìm kiếm -->
+            <!-- Header Section -->
+            <Border Grid.Row="0" CornerRadius="15" Background="#ffffff" Margin="10 10 10 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Search Box -->
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="Tìm kiếm nhân viên:" FontSize="16" Foreground="#00bbf9" VerticalAlignment="Center" />
+                        <TextBox x:Name="SearchBox" Width="200" FontSize="16" VerticalContentAlignment="Center"
+                                     Margin="10,0" Padding="5"
+                                     TextChanged="SearchBox_TextChanged" Height="29" />
+                    </StackPanel>
+
+
+                    <!-- Button Menu for the entire grid -->
+                    <Button Content="Menu" Width="70" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0" Background="#FF0977AA"
+                            Click="ShowMenu_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Xem chi tiết" Click="ViewDetails_Click"/>
+                                <MenuItem Header="Xóa" Click="Delete_Click"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                        <Button Content="Thêm Nhân Viên" Width="150" Height="30" 
+                Background="#4CAF50" Foreground="White" FontWeight="Bold" />
+                </StackPanel>
+            </Border>
+
+            <!-- Bảng danh sách nhân viên -->
+            <Border Grid.Row="1" CornerRadius="15" Background="#ffffff" Margin="10">
+                <DataGrid x:Name="dgNhanVien" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
+                                  BorderThickness="2" BorderBrush="#FF0977AA" Background="{x:Null}" Foreground="#E5000000" 
+                                  HeadersVisibility="Column" AlternatingRowBackground="LightGray"
+                                    IsReadOnly="True"
+                                    CanUserAddRows="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserResizeRows="False"
+                                    CanUserResizeColumns="False"
+                                    CanUserSortColumns="True">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#0977AA" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Padding" Value="15" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <!-- STT -->
+                        <DataGridTextColumn Header="STT" Width="60">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                                <!-- Mã nhân viên -->
+                        <DataGridTextColumn Header="Mã Nhân Viên" Width="150" Binding="{Binding maNV}" />
+
+                        <!-- Tên nhân viên -->
+                        <DataGridTextColumn Header="Tên Nhân Viên" Width="200" Binding="{Binding hoTen}" />
+
+                        <!-- CCCD -->
+                        <DataGridTextColumn Header="CCCD" Width="150" Binding="{Binding cCCD}" />
+
+                        <!-- Giới Tính -->
+                        <DataGridTextColumn Header="Giới Tính" Width="100" Binding="{Binding gioiTinh}" />
+
+                        <!-- Số Điện Thoại -->
+                        <DataGridTextColumn Header="SĐT" Width="170" Binding="{Binding sDT}" />
+
+                        <!-- Địa Chỉ -->
+                        <DataGridTextColumn Header="Địa Chỉ" Width="300" Binding="{Binding diaChi}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
