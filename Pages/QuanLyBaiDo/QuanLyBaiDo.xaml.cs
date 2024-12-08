@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Runtime.Intrinsics.Arm;
 
 namespace ParkingManagement.Pages.QuanLyBaiDo
 {
@@ -22,14 +23,28 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
         public QuanLyBaiDo()
         {
             InitializeComponent();
+
+            SetPemission();
+
             GetListBaiDo();
             //GetListBaiDoOto();
             //GetListBaiDoXeMay();
+
             GetListViTriDoOTo();
             ListBaiDo.ItemsSource = listBaiDo;
             ListVTDOto.ItemsSource = listViTriDoOto;
             ListBaiDoXeMay.ItemsSource = listBaiDoXeMay;
         }
+
+        private void SetPemission()
+        {
+            string role = ParkingManagement.Pages.Login.Login.role;
+            if (role.Equals("Nhân viên"))
+            {
+                AddBaiDoBtn.IsEnabled = false;
+                AddViTriDoBtn.IsEnabled = false;
+            }
+
         private void GetListBaiDo()
         {
             listBaiDo.Clear();
