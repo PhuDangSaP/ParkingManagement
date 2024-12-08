@@ -25,6 +25,23 @@
                                      Margin="10,0" Padding="5"
                                      TextChanged="SearchBox_TextChanged" />
                     </StackPanel>
+<<<<<<< Updated upstream
+=======
+
+                    <!-- Button Menu for the entire grid -->
+                    <Button Content="Menu" Width="70" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0" Background="#FF0977AA"
+                            Click="ShowMenu_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Xem chi tiết" Click="ViewDetails_Click"/>
+                                <MenuItem Header="Xóa" Click="Delete_Click"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+
+                    <Button Content="Thêm Nhân Viên" Width="150" Height="30" Click="AddEmployee_Click"
+                Background="#4CAF50" Foreground="White" FontWeight="Bold" />
+>>>>>>> Stashed changes
                 </StackPanel>
             </Border>
 

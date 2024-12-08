@@ -89,6 +89,7 @@ namespace ParkingManagement.Pages
         {
             if (dgNhanVien.SelectedItem is NhanVien selectedNhanVien)
             {
+<<<<<<< Updated upstream
                 MessageBox.Show($"Chi tiết nhân viên:\n" +
                                 $"Mã NV: {selectedNhanVien.MaNV}\n" +
                                 $"Họ Tên: {selectedNhanVien.HoTen}\n" +
@@ -104,5 +105,36 @@ namespace ParkingManagement.Pages
                 MessageBox.Show("Vui lòng chọn một nhân viên để xem chi tiết.", "Thông Báo");
             }
         }
+=======
+                var detailsWindow = new NhanVienDetails(selectedNhanVien)
+                {
+                    ExistingNhanVien = selectedNhanVien // Truyền nhân viên hiện tại để chỉnh sửa
+                };
+                detailsWindow.ShowDialog();
+                dgNhanVien.ItemsSource = null;
+                dgNhanVien.ItemsSource = nhanVien;
+            }
+        }
+
+        private void AddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var nhanVienMoi = new NhanVien();
+            var addEmployeeDialog = new NhanVienDetails(nhanVienMoi)
+            {
+                ExistingNhanVien = null // Thêm mới => không truyền nhân viên nào
+            };
+
+            if (addEmployeeDialog.ShowDialog() == true) // Nếu thêm thành công
+            {
+                // Cập nhật danh sách hiển thị
+                nhanVien.Add(nhanVienMoi);
+                dgNhanVien.ItemsSource = null; // Reset source để DataGrid cập nhật
+                dgNhanVien.ItemsSource = nhanVien;
+
+                MessageBox.Show("Nhân viên mới đã được thêm vào danh sách!", "Thông báo");
+            }
+        }
+
+>>>>>>> Stashed changes
     }
 }
