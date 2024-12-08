@@ -14,7 +14,7 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
-                <!-- Header: Thêm nhân viên mới và tìm kiếm -->
+            <!-- Header: Thêm nhân viên mới và tìm kiếm -->
             <!-- Header Section -->
             <Border Grid.Row="0" CornerRadius="15" Background="#ffffff" Margin="10 10 10 0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -30,9 +30,9 @@
 
             <!-- Bảng danh sách nhân viên -->
             <Border Grid.Row="1" CornerRadius="15" Background="#ffffff" Margin="10">
-                <DataGrid x:Name="dgNhanVien" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
+                <DataGrid x:Name="dgNhanVien" ScrollViewer.CanContentScroll="True" 
                                   BorderThickness="2" BorderBrush="#FF0977AA" Background="{x:Null}" Foreground="#E5000000" 
-                                  HeadersVisibility="Column" AlternatingRowBackground="LightGray">
+                                  HeadersVisibility="Column" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="#0977AA" />
