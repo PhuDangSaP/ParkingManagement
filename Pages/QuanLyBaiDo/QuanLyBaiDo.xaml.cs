@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using MaterialDesignThemes.Wpf;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,62 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
     {
         private List<BaiDo> listBaiDoOto = new List<BaiDo>();
         private List<BaiDo> listBaiDoXeMay = new List<BaiDo>();
+        private List<BaiDo> listBaiDo = new List<BaiDo>();
         private List<ViTriDo> listViTriDoOto = new List<ViTriDo>();
+     
         public QuanLyBaiDo()
         {
             InitializeComponent();
-            GetListBaiDoOto();
-            GetListBaiDoXeMay();
+            GetListBaiDo();
+            //GetListBaiDoOto();
+            //GetListBaiDoXeMay();
             GetListViTriDoOTo();
+            ListBaiDo.ItemsSource = listBaiDo;
             ListVTDOto.ItemsSource = listViTriDoOto;
             ListBaiDoXeMay.ItemsSource = listBaiDoXeMay;
+        }
+        private void GetListBaiDo()
+        {
+            listBaiDo.Clear();
+            listBaiDoOto.Clear();
+            listBaiDoXeMay.Clear();
+            List<BsonDocument> list = DatabaseHandler.Instance.GetCollection("BaiDo").Find(new BsonDocument()).ToList();
+            foreach (BsonDocument item in list)
+            {
+                string maBD = item["MaBD"].AsString;
+                string tenBD = item["TenBD"].AsString;
+                string loaiBD = item["LoaiBD"].AsString;
+                int soLuong = item["SoLuong"].ToInt32();
+                string trangThai = item["TrangThai"].AsString; 
+                string color = "";
+                        switch (trangThai)
+                        {
+                            case "Sẵn sàng":
+                                color = "#03fcb1";
+                                break;
+                            case "Đang hoạt động":
+                                color = "#6bb4d1";
+                                break;
+                        }
+                listBaiDo.Add(new BaiDo { maBD = maBD, tenBD = tenBD, loaiBD = loaiBD, soLuong = soLuong,color=color });
+                switch(loaiBD)
+                {
+                    case "Oto":
+                        listBaiDoOto.Add(new BaiDo { maBD = maBD, tenBD = tenBD, loaiBD = loaiBD, soLuong = soLuong,color=color });
+                        break;
+                    case "XeMay":
+                        var countFilter = Builders<BsonDocument>.Filter.Eq("MaBD", maBD);
+                        int soChoDangSuDung = Convert.ToInt32(DatabaseHandler.Instance.GetCollection("ChiTietRaVao").CountDocuments(countFilter));
+
+                       
+                        listBaiDoXeMay.Add(new BaiDo { maBD = maBD, tenBD = tenBD, loaiBD = loaiBD, soLuong = soLuong, trangThai = trangThai, soChoDangSuDung = soChoDangSuDung, soChoConTrong = soLuong - soChoDangSuDung, color = color });
+                        break;
+
+                }
+            }
+            ListBaiDo.Items.Refresh();
+            ListBaiDoXeMay.Items.Refresh();
+          
         }
         private void GetListBaiDoOto()
         {
@@ -51,17 +99,29 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                 string tenBD = item["TenBD"].AsString;
                 string loaiBD = item["LoaiBD"].AsString;
                 int soLuong = item["SoLuong"].ToInt32();
-
+                string trangThai = item["TrangThai"].AsString;
                 var countFilter = Builders<BsonDocument>.Filter.Eq("MaBD", maBD);
                 int soChoDangSuDung = Convert.ToInt32(DatabaseHandler.Instance.GetCollection("ChiTietRaVao").CountDocuments(countFilter));
-                listBaiDoXeMay.Add(new BaiDo { maBD = maBD, tenBD = tenBD, loaiBD = loaiBD, soLuong = soLuong, soChoDangSuDung=soChoDangSuDung,soChoConTrong = soLuong - soChoDangSuDung });
+
+                string color = "";
+                switch (trangThai)
+                {
+                    case "Sẵn sàng":
+                        color = "#03fcb1";
+                        break;
+                    case "Đang hoạt động":
+                        color = "#6bb4d1";
+                        break;
+                }
+                listBaiDoXeMay.Add(new BaiDo { maBD = maBD, tenBD = tenBD, loaiBD = loaiBD, soLuong = soLuong,trangThai=trangThai, soChoDangSuDung = soChoDangSuDung, soChoConTrong = soLuong - soChoDangSuDung,color=color });
             }
             ListBaiDoXeMay.Items.Refresh();
-        }    
+        }
         private void GetListViTriDoOTo()
         {
             listViTriDoOto.Clear();
-            foreach(BaiDo baido in  listBaiDoOto)
+       
+            foreach (BaiDo baido in listBaiDoOto)
             {
                 var filter = Builders<BsonDocument>.Filter.Eq("MaBD", baido.maBD);
                 List<BsonDocument> list = DatabaseHandler.Instance.GetCollection("ViTriDo").Find(filter).ToList();
@@ -71,11 +131,22 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                     string maBD = item["MaBD"].AsString;
                     string tenVTD = item["TenVTD"].AsString;
                     string trangThai = item["TrangThai"].AsString;
-                    listViTriDoOto.Add(new ViTriDo {maVTD=maVTD,maBD=maBD,tenVTD=tenVTD,trangThai=trangThai });
+
+                    string color = "";
+                    switch (trangThai)
+                    {
+                        case "Sẵn sàng":
+                            color = "#03fcb1";
+                            break;
+                        case "Đang hoạt động":
+                            color = "#6bb4d1";
+                            break;
+                    }
+                    listViTriDoOto.Add(new ViTriDo { maVTD = maVTD, maBD = maBD, tenVTD = tenVTD, trangThai = trangThai,color=color});
                 }
 
-            }  
-            ListVTDOto.Items.Refresh();  
+            }
+            ListVTDOto.Items.Refresh();
         }
 
         private void AddBaiDo_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -107,9 +178,18 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                 tenVTD = result["TenVTD"].AsString,
                 trangThai = result["TrangThai"].AsString
             };
-            ChiTietVTDo chiTietVTDo = new ChiTietVTDo(viTriDo);
-            chiTietVTDo.ShowDialog();
-            GetListViTriDoOTo();
+            switch (viTriDo.trangThai)
+            {
+                case "Sẵn sàng":
+                    ChiTietVTDo chiTietVTDo = new ChiTietVTDo(viTriDo);
+                    chiTietVTDo.ShowDialog();
+                    GetListViTriDoOTo();
+                    break;
+                case "Đang hoạt động":
+                    MessageBox.Show("Không thể chỉnh sửa vị trí đỗ đang hoạt động");
+                    break;
+            }
+
         }
         private void BaiDo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -122,14 +202,26 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                 tenBD = doc["TenBD"].AsString,
                 loaiBD = doc["LoaiBD"].AsString,
                 soLuong = doc["SoLuong"].ToInt32(),
+                trangThai = doc["TrangThai"].AsString,
             };
-            ChiTietBaiDo dialog = new ChiTietBaiDo(baiDo);
-            bool? result = dialog.ShowDialog();
-            if (result == true)
+            switch (baiDo.trangThai)
             {
-                GetListBaiDoOto();
-                GetListBaiDoXeMay();
+                case "Sẵn sàng":
+                    ChiTietBaiDo dialog = new ChiTietBaiDo(baiDo);
+                    bool? result = dialog.ShowDialog();
+                    if (result == true)
+                    {
+                        //GetListBaiDoOto();
+                        //GetListBaiDoXeMay();
+                        GetListBaiDo();
+                    }
+                    break;
+                case "Đang hoạt động":
+                    MessageBox.Show("Không thể chỉnh sửa bãi đỗ đang hoạt động");
+                    break;
             }
+
+
 
         }
     }

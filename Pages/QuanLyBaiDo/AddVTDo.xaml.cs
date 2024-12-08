@@ -70,6 +70,11 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                     {"TenVTD", TenVTDTB.Text },
                     {"TrangThai","Sẵn sàng"}
                 });
+                var filter = Builders<BsonDocument>.Filter.Eq("MaBD", baiDo.maBD);
+                var update = Builders<BsonDocument>.Update
+                .Set("TrangThai", "Đang hoạt động");
+
+                DatabaseHandler.Instance.GetCollection("BaiDo").UpdateOne(filter, update);
                 DialogResult = true;
             }
             else
@@ -77,7 +82,7 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                 MessageBox.Show("Vui lòng chọn một bãi đỗ!");
                 DialogResult = false;
             }
-            Close();
+        
         }
     }
 }
