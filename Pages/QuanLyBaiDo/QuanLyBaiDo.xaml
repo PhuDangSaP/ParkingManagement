@@ -23,7 +23,15 @@
                             <TextBlock Text="Thêm bãi đỗ" FontSize="16" Foreground="#00bbf9"></TextBlock>
                     </StackPanel>
                 </Button>
+
+                    <Button Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddListVTD_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Thêm tệp vị trí đỗ" FontSize="16" Foreground="#00bbf9"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                   
                     <Button x:Name="AddViTriDoBtn" Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddVTD_Click">
+
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Thêm vị trí đỗ" FontSize="16" Foreground="#00bbf9"></TextBlock>
                         </StackPanel>

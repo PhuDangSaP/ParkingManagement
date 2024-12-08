@@ -37,7 +37,7 @@
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
-                        <Button Content="Thêm Nhân Viên" Width="150" Height="30" Click="AddEmployee_Click"
+                        <Button Content="Thêm Nhân Viên" Width="150" Height="30" 
                 Background="#4CAF50" Foreground="White" FontWeight="Bold" />
                 </StackPanel>
             </Border>
