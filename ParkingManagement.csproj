@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="asset\background.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="3.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="asset\background.jpeg" />
   </ItemGroup>
 
 </Project>
