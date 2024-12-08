@@ -40,6 +40,9 @@ WindowStartupLocation="CenterScreen">
                     <Button Content="Hủy" Style="{StaticResource CloseButton}" Click="Huy_Click">
 
                     </Button>
+                    <Button Content="Xóa" Style="{StaticResource CloseButton}" Margin="20 0 0 0" Click="XoaBaiDo_Click">
+
+                    </Button>
                     <Button Content="Lưu" Style="{StaticResource CloseButton}" Margin="20 0" Click="UpdateBaiDo_Click">
 
                     </Button>

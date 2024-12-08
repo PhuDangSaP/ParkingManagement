@@ -52,6 +52,13 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
         {
             Close();
         }
+        private void DeleteVTD_Click(object sender, RoutedEventArgs e)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("MaVTD", MaVTDTB.Text);
+            DatabaseHandler.Instance.GetCollection("ViTriDo").DeleteOne(filter);
+            MessageBox.Show("Xóa vị trí đỗ thành công");
+            DialogResult = true;
+        }
         private void UpdateVTD_Click(object sender, RoutedEventArgs e)
         {
             BaiDo baiDo = BaiDoCBB.SelectedItem as BaiDo;

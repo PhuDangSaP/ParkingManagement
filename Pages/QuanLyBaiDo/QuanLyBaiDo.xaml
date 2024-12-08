@@ -72,8 +72,38 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
+                    <TabItem Header="Tất cả">
+                        <StackPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <WrapPanel ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent">
+                                    <ItemsControl x:Name="ListBaiDo">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button  Tag="{Binding maBD}" Width="250" Height="100" Margin="10"  Background="{Binding color}" Foreground="Black" FontSize="20" Click="BaiDo_Click">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock HorizontalAlignment="Center" Text="{Binding tenBD}"/>
+                                                        
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <TextBlock Text="Số lượng vị trí: "/>
+                                                            <TextBlock Text="{Binding soLuong}"/>
+                                                        </StackPanel>
 
-                <TabItem Header="🚘 Ô tô">
+                                                    </StackPanel>
+                                                </Button>
+
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </WrapPanel>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="🚘 Ô tô">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <WrapPanel ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent">
                                 <ItemsControl x:Name="ListVTDOto">
@@ -84,7 +114,7 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Button  Content="{Binding tenVTD}" Tag="{Binding maVTD}" Width="150" Height="70" Margin="10"  Background="LightBlue" Foreground="Black" FontSize="20" Click="VTD_Click"/>
+                                            <Button Background="{Binding color}" Content="{Binding tenVTD}" Tag="{Binding maVTD}" Width="150" Height="70" Margin="10"  Foreground="Black" FontSize="20" Click="VTD_Click"/>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
@@ -103,7 +133,7 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button  Tag="{Binding maBD}" Width="250" Height="100" Margin="10"  Background="LightBlue" Foreground="Black" FontSize="20" Click="BaiDo_Click">
+                                                <Button  Tag="{Binding maBD}" Width="250" Height="100" Margin="10"   Background="{Binding color}" Foreground="Black" FontSize="20" Click="BaiDo_Click">
                                                    <StackPanel Orientation="Vertical">
                                                         <TextBlock HorizontalAlignment="Center" Text="{Binding tenBD}"/>
                                                         <StackPanel Orientation="Horizontal" >
