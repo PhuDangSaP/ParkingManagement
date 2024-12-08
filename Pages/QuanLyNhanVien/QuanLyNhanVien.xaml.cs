@@ -84,5 +84,25 @@ namespace ParkingManagement.Pages
                 MessageBox.Show("Vui lòng chọn một nhân viên để xóa.", "Thông Báo");
             }
         }
+
+        private void ViewDetails_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgNhanVien.SelectedItem is NhanVien selectedNhanVien)
+            {
+                MessageBox.Show($"Chi tiết nhân viên:\n" +
+                                $"Mã NV: {selectedNhanVien.MaNV}\n" +
+                                $"Họ Tên: {selectedNhanVien.HoTen}\n" +
+                                $"Giới Tính: {selectedNhanVien.GioiTinh}\n" +
+                                $"CCCD: {selectedNhanVien.CCCD}\n" +
+                                $"SĐT: {selectedNhanVien.SDT}\n" +
+                                $"Địa Chỉ: {selectedNhanVien.DiaChi}\n" +
+                                $"Tài Khoản: {selectedNhanVien.TaiKhoan}\n" +
+                                $"Chức vụ: {selectedNhanVien.Role}", "Thông Tin Chi Tiết");
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một nhân viên để xem chi tiết.", "Thông Báo");
+            }
+        }
     }
 }
