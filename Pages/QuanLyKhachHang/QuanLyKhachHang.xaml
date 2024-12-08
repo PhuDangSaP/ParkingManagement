@@ -9,6 +9,121 @@
       Title="QuanLyKhachHang">
 
     <Grid>
-        
+        <Grid x:Name="ThemKhachHang" Background="White" Panel.ZIndex="3" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Height="369">
+            <StackPanel Margin="15,0,0,0" >
+                <StackPanel Height="132" Width="345">
+                    <TextBlock TextWrapping="Wrap" Text="NHẬP THÔNG TIN KHÁCH HÀNG" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0,20,10,20"/>
+                    <TextBlock TextWrapping="Wrap" Text="Họ và tên" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tenKH" TextWrapping="Wrap" Text="Nhập họ tên khách hàng" Width="317" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,0" FontWeight="Thin" GotFocus="tenKH_GotFocus" LostFocus="tenKH_LostFocus"/>
+                </StackPanel>
+                <StackPanel Height="61" Orientation="Horizontal">
+                    <StackPanel Height="50" Width="200">
+                        <TextBlock TextWrapping="Wrap" Text="Số CCCD" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="cccd" TextWrapping="Wrap" Text="Nhập số CCCD" Width="187" HorizontalAlignment="Left" Margin="0,5,0,0" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" GotFocus="cccd_GotFocus" LostFocus="cccd_LostFocus" FontWeight="Thin"/>
+                    </StackPanel>
+                    <StackPanel Height="50" Width="147">
+                        <TextBlock TextWrapping="Wrap" Text="Giới Tính"/>
+                        <ComboBox x:Name="gt" Width="120" HorizontalAlignment="Left" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="0,5,0,0" SelectedIndex="0" Padding="5,4,5,4">
+                            <ComboBoxItem Content="Nam" Tag="Nam"  />
+                            <ComboBoxItem Content="Nữ" Tag="Nữ"  />
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Height="61" Orientation="Horizontal">
+                    <StackPanel Height="50" Width="169">
+                        <TextBlock TextWrapping="Wrap" Text="Số điện thoại" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="sdt" TextWrapping="Wrap" Text="Nhập số điện thoại" Width="157" HorizontalAlignment="Left" Margin="0,5,0,0" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" FontWeight="Thin" GotFocus="sdt_GotFocus" LostFocus="sdt_LostFocus"/>
+                    </StackPanel>
+                    <StackPanel Height="50" Width="172">
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Mã xe"/>
+                        <TextBox x:Name="maXe" TextWrapping="Wrap" Text="Nhập mã xe" Width="152" Background="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF0977AA" SelectionBrush="{x:Null}" BorderThickness="2,2,2,2" Padding="5,4,0,4" HorizontalAlignment="Left" Margin="0,5,0,0" GotFocus="maXe_GotFocus" LostFocus="maXe_LostFocus" FontWeight="Thin"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Height="61">
+                    <TextBlock TextWrapping="Wrap" Text="Địa chỉ" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="dc" TextWrapping="Wrap" Text="Nhập địa chỉ khách hàng" Width="321" HorizontalAlignment="Left" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Padding="4,4,0,4" Margin="0,5,0,0" FontWeight="Thin" GotFocus="dc_GotFocus" LostFocus="dc_LostFocus"/>
+                </StackPanel>
+                <StackPanel Height="47" Orientation="Horizontal" Width="323" HorizontalAlignment="Left" FlowDirection="RightToLeft">
+                    <Button x:Name="LuuKH" Content="Lưu" HorizontalAlignment="Right" FlowDirection="RightToLeft" Margin="0,0,23,0" BorderBrush="#FF0977AA" Background="#FF0977AA" Click="LuuKH_Click" />
+                    <Button x:Name="Thoat" Content="Thoát" Margin="0,0,2,0" Background="{x:Null}" Foreground="#FF0977AA" BorderBrush="#FF0977AA" Click="Thoat_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="panel" Panel.ZIndex="2" Background="#FF747373" Opacity="0.6" Visibility="Hidden"/>
+        <Grid x:Name="main" Background="White" >
+
+            <StackPanel>
+                <Grid Height="160">
+                    <StackPanel Height="50" Margin="10,10,0,90" Orientation="Horizontal">
+                        <Image Height="32" Width="32" Source="/asset/icons/add-user.png"/>
+                        <Label x:Name="ThemKH" Content="Thêm khách hàng mới" VerticalContentAlignment="Center" Foreground="#FF0977AA" Margin="5,0,0,0" MouseDown="ThemKH_MouseDown" FontSize="14" FontWeight="SemiBold"/>
+                        <Image Height="32" Width="32" Source="/asset/icons/delete.png" Margin="50,0,0,0"/>
+                        <Label x:Name="XoaKH" Content="Xóa khách hàng" VerticalContentAlignment="Center" Foreground="Red" MouseDown="XoaKH_MouseDown" FontSize="14" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <StackPanel Height="50
+                     " Margin="0,60,0,40" Orientation="Horizontal">
+                        <TextBox x:Name="SearchBox" TextWrapping="Wrap" Width="210" Height="40" BorderBrush="#FF0977AA" BorderThickness="2,2,2,2" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" Text="Nhập mã khách hàng cần tìm" FontWeight="Thin"/>
+                        <Button x:Name="TimKH" Content="⌕ Tìm Khách Hàng" Click="TimKh_Click" Margin="20,0,0,0" Background="#FF0977AA" BorderBrush="{x:Null}" Padding="10,4,16,4"/>
+
+                    </StackPanel>
+                </Grid>
+                <Grid Height="650" Margin="10,0,10,0">
+               
+
+
+                    <DataGrid x:Name="dtDsKH" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" BorderThickness="2,2,2,2" Background="White" Foreground="#E5000000" HeadersVisibility="Column" BorderBrush="#FF0977AA" Panel.ZIndex="1" >
+                       
+                        <DataGrid.CellStyle>
+                            <Style
+    BasedOn="{StaticResource MaterialDesignDataGridCell}"
+    TargetType="{x:Type DataGridCell}">
+    <Style.Triggers>
+        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+        </Trigger>
+    </Style.Triggers>
+</Style>
+                        </DataGrid.CellStyle>
+
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#0977aa"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Padding" Value="15"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Khách Hàng" Binding="{Binding MaKH}" Width="130" IsReadOnly="True" >
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Họ Tên" Binding="{Binding TenKH}" Width="180"  IsReadOnly="True">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="CCCD" Binding="{Binding Cccd}" Width="150"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Giới Tính" Binding="{Binding GioiTinh}" Width="90"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding Sdt}" Width="120"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Địa Chỉ" Binding="{Binding DiaChi}" Width="*"  IsReadOnly="True">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Mã Xe" Binding="{Binding MaXe}" Width="100"  IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </StackPanel>
+           
+        </Grid>
+
     </Grid>
 </Page>

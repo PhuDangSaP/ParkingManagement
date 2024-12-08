@@ -30,6 +30,7 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
 
         private void Huy_Click(object sender, RoutedEventArgs e)
         {
+            
             Close();
         }
 
