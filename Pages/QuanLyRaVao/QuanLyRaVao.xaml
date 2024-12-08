@@ -33,6 +33,23 @@
                 </StackPanel>
             </Border>
 
+            <Border Grid.Row="0" CornerRadius="15" Background="#ffffff" Margin="10 10 10 0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Margin="10 0" Background="Transparent" BorderThickness="0" Click="AddVehicle_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Thêm xe" FontSize="16" Foreground="#0078D7"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tìm kiếm:" Foreground="#0078D7" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBox MinWidth="180" FontSize="16" VerticalContentAlignment="Center" 
+                     materialDesign:HintAssist.Hint="Nhập biển số" 
+                     materialDesign:HintAssist.Foreground="Gray" Padding="0,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+
             <Border Grid.Row="1" CornerRadius="15" Background="#ffffff" Margin="10">
                 <TabControl Background="#ffffff" Margin="10" BorderBrush="Gainsboro"
                             x:Name="TabControl_TypeVehicle" SelectedItem="{Binding SelectedItem_TypeVehicle}">
@@ -122,7 +139,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mã Ra/Vào" DisplayMemberBinding="{Binding maRV}" />
-                            <GridViewColumn Header="Mã Bãi Đỗ" DisplayMemberBinding="{Binding maBD}" />
+                            <GridViewColumn Header="Mã Khách Hàng" DisplayMemberBinding="{Binding maKH}" />
                             <GridViewColumn Header="Biển Số Xe" DisplayMemberBinding="{Binding bienSoXe}" />
                             <GridViewColumn Header="Thời Gian Vào" DisplayMemberBinding="{Binding thoiGianVao}" />
                             <GridViewColumn Header="Thời Gian Ra" DisplayMemberBinding="{Binding thoiGianRa}" />
