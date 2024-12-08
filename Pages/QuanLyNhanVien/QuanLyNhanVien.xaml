@@ -23,7 +23,7 @@
                         <TextBlock Text="Tìm kiếm nhân viên:" FontSize="16" Foreground="#00bbf9" VerticalAlignment="Center" />
                         <TextBox x:Name="SearchBox" Width="200" FontSize="16" VerticalContentAlignment="Center"
                                      Margin="10,0" Padding="5"
-                                     TextChanged="SearchBox_TextChanged" Height="24" />
+                                     TextChanged="SearchBox_TextChanged" Height="29" />
                     </StackPanel>
 
 
@@ -44,7 +44,7 @@
 
             <!-- Bảng danh sách nhân viên -->
             <Border Grid.Row="1" CornerRadius="15" Background="#ffffff" Margin="10">
-                <DataGrid x:Name="dgNhanVien" AutoGenerateColumns="False" LoadingRow="dgNhanVien_LoadingRow" ScrollViewer.CanContentScroll="True" 
+                <DataGrid x:Name="dgNhanVien" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
                                   BorderThickness="2" BorderBrush="#FF0977AA" Background="{x:Null}" Foreground="#E5000000" 
                                   HeadersVisibility="Column" AlternatingRowBackground="LightGray"
                                     IsReadOnly="True"
@@ -81,10 +81,10 @@
                         <DataGridTextColumn Header="CCCD" Width="150" Binding="{Binding cCCD}" />
 
                         <!-- Giới Tính -->
-                        <DataGridTextColumn Header="Giới Tính" Width="150" Binding="{Binding gioiTinh}" />
+                        <DataGridTextColumn Header="Giới Tính" Width="100" Binding="{Binding gioiTinh}" />
 
                         <!-- Số Điện Thoại -->
-                        <DataGridTextColumn Header="SĐT" Width="120" Binding="{Binding sDT}" />
+                        <DataGridTextColumn Header="SĐT" Width="170" Binding="{Binding sDT}" />
 
                         <!-- Địa Chỉ -->
                         <DataGridTextColumn Header="Địa Chỉ" Width="300" Binding="{Binding diaChi}" />
