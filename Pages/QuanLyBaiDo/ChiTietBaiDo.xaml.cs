@@ -41,6 +41,13 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
         {
             Close();
         }
+        private void XoaBaiDo_Click(object sender, RoutedEventArgs e)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("MaBD", MaBaiDoTB.Text);
+            DatabaseHandler.Instance.GetCollection("BaiDo").DeleteOne(filter);
+            MessageBox.Show("Xóa bãi đỗ thành công");
+            DialogResult = true;
+        }
         private void UpdateBaiDo_Click(object sender, RoutedEventArgs e)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("MaBD", MaBaiDoTB.Text);
