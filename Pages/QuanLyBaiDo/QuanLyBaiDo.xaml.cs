@@ -44,7 +44,7 @@ namespace ParkingManagement.Pages.QuanLyBaiDo
                 AddBaiDoBtn.IsEnabled = false;
                 AddViTriDoBtn.IsEnabled = false;
             }
-
+        }
         private void GetListBaiDo()
         {
             listBaiDo.Clear();
