@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkingManagement
+namespace ParkingManagement.Pages.QuanLyKhachHang
 {
-   public  class KhachHang
+    public class KhachHang
     {
         public void taoKH(string ma, string ten, string cccd, string gioitinh, string sdt, string diachi, string bien, string tenxe)
         {
@@ -28,7 +28,5 @@ namespace ParkingManagement
         public string BienSo { get; set; }
 
         public string TenLoaiXe { get; set; }
-
-
     }
-}
+    }
