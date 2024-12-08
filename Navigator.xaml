@@ -27,9 +27,10 @@
                            Foreground="White"
                                FontSize="16"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
+                               HorizontalAlignment="Center" FontFamily="Castellar"
                            
                               />
+                    
                 </Grid>
 
                 <StackPanel Grid.Row="1" Margin="0 40 0 20" >
@@ -78,7 +79,11 @@
                 </StackPanel>
             </Button>
                     <Button Style="{StaticResource MenuButton}" Click="SignOut_Click">
-                        <TextBlock  Margin="60 0 0 0" Text="Đăng xuất" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                            <materialDesign:PackIcon Kind="SignOut" Margin="20 0" Height="25" Width="25"/>
+                            <TextBlock  Text="Đăng xuất" FontSize="20"/>
+                        </StackPanel>
+                        
                     </Button>
         </StackPanel>
             </Grid>
