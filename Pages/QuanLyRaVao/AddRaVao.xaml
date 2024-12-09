@@ -46,6 +46,14 @@
                             <Label Content="Mã xe" Style="{StaticResource NormalLabel}" Width="120"/>
                             <TextBox x:Name="MaXeTB" Style="{StaticResource InputTextBox}"/>
                         </StackPanel>
+                        <StackPanel Name="bdSP" Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã bãi đỗ" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaBDTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="vtdSP" Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã vị trí đỗ" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaVTDTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
                     </StackPanel>
 
                     <!-- Thông tin khách hàng -->

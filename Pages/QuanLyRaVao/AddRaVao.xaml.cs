@@ -40,7 +40,11 @@ namespace ParkingManagement.Pages.QuanLyRaVao
             var khachHangCollection = DatabaseHandler.Instance.GetCollection("KhachHang");
             var chiTietRaVaoCollection = DatabaseHandler.Instance.GetCollection("ChiTietRaVao");
 
-            var newXe = new BsonDocument
+            var xeFilter = Builders<BsonDocument>.Filter.Eq("BienSo", BienSoXeTB.Text.Trim());
+            var xeResult = xeCollection.Find(xeFilter).FirstOrDefault();
+            if (xeResult == null)
+            
+            {var newXe = new BsonDocument
             {
                 { "MaXe", MaXeTB.Text.Trim() },
                 { "BienSo", BienSoXeTB.Text.Trim() },
@@ -58,7 +62,10 @@ namespace ParkingManagement.Pages.QuanLyRaVao
                 { "SDT", SDTTB.Text.Trim() },
                 { "CCCD", CCCDTB.Text.Trim() }
             };
-            khachHangCollection.InsertOne(newKhachHang);
+                khachHangCollection.InsertOne(newKhachHang);
+
+            }
+                
 
             string maRV = MaRaVaoTB.Text.Trim();
             if (string.IsNullOrEmpty(maRV))
@@ -67,26 +74,42 @@ namespace ParkingManagement.Pages.QuanLyRaVao
             }
 
             string maBaiDo = string.Empty;
+            string maVTD = string.Empty;
             if (LoaiXeCBB.SelectedItem?.ToString() == "Ô tô")
             {
-                maBaiDo = "VTD_" + Guid.NewGuid().ToString();
-            }
-            else if (LoaiXeCBB.SelectedItem?.ToString() == "Xe máy")
-            {
-                maBaiDo = "BD_" + Guid.NewGuid().ToString();
-
+                maVTD = MaVTDTB.Text;
                 var newChiTietRaVao = new BsonDocument
-            {
+                {
                 { "MaRV", maRV },
                 { "MaKH", MaKhachHangTB.Text.Trim() },
                 { "BienSo", BienSoXeTB.Text.Trim() },
                 { "ThoiGianVao", DateTime.UtcNow },
-                { "MaBaiDo", maBaiDo }
-            };
+                { "MaVTD", maVTD }
+                };
                 chiTietRaVaoCollection.InsertOne(newChiTietRaVao);
 
-                MessageBox.Show("Thông tin đã được lưu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                var filter= Builders<BsonDocument>.Filter.Eq("MaVTD", maVTD);
+                var update = Builders<BsonDocument>.Update
+               .Set("TrangThai", "Đang hoạt động");
+                DatabaseHandler.Instance.GetCollection("ViTriDo").UpdateOne(filter,update);
             }
+            else if (LoaiXeCBB.SelectedItem?.ToString() == "Xe máy")
+            {
+                maBaiDo = MaBDTB.Text;
+
+                var newChiTietRaVao = new BsonDocument
+                {
+                { "MaRV", maRV },
+                { "MaKH", MaKhachHangTB.Text.Trim() },
+                { "BienSo", BienSoXeTB.Text.Trim() },
+                { "ThoiGianVao", DateTime.UtcNow },
+                { "MaBD", maBaiDo }
+                };
+                chiTietRaVaoCollection.InsertOne(newChiTietRaVao);
+
+                
+            }MessageBox.Show("Thông tin đã được lưu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            DialogResult = true;
         }
 
 
