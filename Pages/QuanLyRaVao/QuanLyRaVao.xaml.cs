@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,12 +19,14 @@ namespace ParkingManagement.Pages.QuanLyRaVao
             ListChiTietRaVao.ItemsSource = listChiTietRaVao;
         }
 
-        private void GetListChiTietRaVao()
+        private void GetListChiTietRaVao(string searchText = "")
         {
             listChiTietRaVao.Clear();
             try
             {
-                var documents = DatabaseHandler.Instance.GetCollection("ChiTietRaVao").Find(new BsonDocument()).ToList();
+                var filter = new BsonDocument();
+
+                var documents = DatabaseHandler.Instance.GetCollection("ChiTietRaVao").Find(filter).ToList();
 
                 foreach (var doc in documents)
                 {
@@ -32,6 +35,8 @@ namespace ParkingManagement.Pages.QuanLyRaVao
                     string bienSoXe = doc.GetValue("BienSoXe", "Không rõ").ToString();
                     DateTime thoiGianVao = doc.GetValue("ThoiGianVao", DateTime.MinValue).ToUniversalTime();
                     DateTime? thoiGianRa = doc.Contains("ThoiGianRa") ? doc["ThoiGianRa"].ToNullableUniversalTime() : null;
+                    string maBaiDo = doc.GetValue("MaBaiDo", "").ToString();
+                    string maViTriDo = doc.GetValue("MaViTriDo", "").ToString();
 
                     listChiTietRaVao.Add(new ChiTietRaVao
                     {
@@ -39,7 +44,9 @@ namespace ParkingManagement.Pages.QuanLyRaVao
                         maKH = maKH,
                         bienSoXe = bienSoXe,
                         thoiGianVao = thoiGianVao,
-                        thoiGianRa = thoiGianRa
+                        thoiGianRa = thoiGianRa,
+                        maBaiDo = maBaiDo,
+                        maViTriDo = maViTriDo
                     });
                 }
             }
@@ -49,7 +56,13 @@ namespace ParkingManagement.Pages.QuanLyRaVao
             }
         }
 
-        private void AddRaVao_Click(object sender, RoutedEventArgs e)
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text;
+            GetListChiTietRaVao(searchText);
+        }
+
+        private void AddVehicle_Click(object sender, RoutedEventArgs e)
         {
             AddRaVao dialog = new AddRaVao();
             bool? result = dialog.ShowDialog();
@@ -61,75 +74,16 @@ namespace ParkingManagement.Pages.QuanLyRaVao
 
         private void CapNhatThoiGianRa_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn == null) return;
-
-            string maRV = btn.Tag?.ToString();
-            if (string.IsNullOrEmpty(maRV)) return;
-
-            var filter = Builders<BsonDocument>.Filter.Eq("MaRV", maRV);
-            var update = Builders<BsonDocument>.Update.Set("ThoiGianRa", DateTime.UtcNow);
-
-            try
-            {
-                DatabaseHandler.Instance.GetCollection("ChiTietRaVao").UpdateOne(filter, update);
-                MessageBox.Show("Thời gian ra đã được cập nhật.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                GetListChiTietRaVao();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi cập nhật thời gian ra: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            var button = sender as Button;
+            string maRV = button?.Tag.ToString();
+            // Cập nhật thời gian ra logic ở đây
         }
 
         private void XoaRaVao_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn == null) return;
-
-            string maRV = btn.Tag?.ToString();
-            if (string.IsNullOrEmpty(maRV)) return;
-
-            var filter = Builders<BsonDocument>.Filter.Eq("MaRV", maRV);
-
-            try
-            {
-                DatabaseHandler.Instance.GetCollection("ChiTietRaVao").DeleteOne(filter);
-                MessageBox.Show("Thông tin ra vào đã được xóa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                GetListChiTietRaVao();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi xóa dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void VehicleDetails_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
-            if (btn == null) return;
-
-            string maXe = btn.Tag?.ToString();
-            if (!string.IsNullOrEmpty(maXe))
-            {
-                MessageBox.Show($"Chi tiết phương tiện:\nMã xe: {maXe}", "Thông tin chi tiết", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Không tìm thấy mã xe!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void AddVehicle_Click(object sender, RoutedEventArgs e)
-        {
-            AddRaVao addRaVaoDialog = new AddRaVao();
-            bool? dialogResult = addRaVaoDialog.ShowDialog();
-
-            if (dialogResult == true)
-            {
-                MessageBox.Show("Phương tiện đã được thêm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                GetListChiTietRaVao();
-            }
+            var button = sender as Button;
+            string maRV = button?.Tag.ToString();
+            // Xóa logic ở đây
         }
     }
 }
