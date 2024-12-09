@@ -1,19 +1,16 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace ParkingManagement.Pages.QuanLyRaVao
 {
-    /// <summary>
-    /// Interaction logic for QuanLyRaVao.xaml
-    /// </summary>
     public partial class QuanLyRaVao : Page
     {
-        private List<ChiTietRaVao> listChiTietRaVao = new List<ChiTietRaVao>();
+        private ObservableCollection<ChiTietRaVao> listChiTietRaVao = new ObservableCollection<ChiTietRaVao>();
 
         public QuanLyRaVao()
         {
@@ -22,31 +19,50 @@ namespace ParkingManagement.Pages.QuanLyRaVao
             ListChiTietRaVao.ItemsSource = listChiTietRaVao;
         }
 
-        private void GetListChiTietRaVao()
+        private void GetListChiTietRaVao(string searchText = "")
         {
             listChiTietRaVao.Clear();
-            List<BsonDocument> list = DatabaseHandler.Instance.GetCollection("ChiTietRaVao").Find(new BsonDocument()).ToList();
-            foreach (BsonDocument item in list)
+            try
             {
-                string maRV = item["MaRV"].AsString;
-                string maBD = item["MaBD"].AsString;
-                string bienSoXe = item["BienSoXe"].AsString;
-                DateTime thoiGianVao = item["ThoiGianVao"].ToUniversalTime();
-                DateTime? thoiGianRa = item.Contains("ThoiGianRa") ? item["ThoiGianRa"].ToNullableUniversalTime() : null;
+                var filter = new BsonDocument();
 
-                listChiTietRaVao.Add(new ChiTietRaVao
+                var documents = DatabaseHandler.Instance.GetCollection("ChiTietRaVao").Find(filter).ToList();
+
+                foreach (var doc in documents)
                 {
-                    maRV = maRV,
-                    maBD = maBD,
-                    bienSoXe = bienSoXe,
-                    thoiGianVao = thoiGianVao,
-                    thoiGianRa = thoiGianRa
-                });
+                    string maRV = doc.GetValue("MaRV", "").ToString();
+                    string maKH = doc.GetValue("MaKH", "").ToString();
+                    string bienSoXe = doc.GetValue("BienSoXe", "Không rõ").ToString();
+                    DateTime thoiGianVao = doc.GetValue("ThoiGianVao", DateTime.MinValue).ToUniversalTime();
+                    DateTime? thoiGianRa = doc.Contains("ThoiGianRa") ? doc["ThoiGianRa"].ToNullableUniversalTime() : null;
+                    string maBaiDo = doc.GetValue("MaBaiDo", "").ToString();
+                    string maViTriDo = doc.GetValue("MaViTriDo", "").ToString();
+
+                    listChiTietRaVao.Add(new ChiTietRaVao
+                    {
+                        maRV = maRV,
+                        maKH = maKH,
+                        bienSoXe = bienSoXe,
+                        thoiGianVao = thoiGianVao,
+                        thoiGianRa = thoiGianRa,
+                        maBaiDo = maBaiDo,
+                        maViTriDo = maViTriDo
+                    });
+                }
             }
-            ListChiTietRaVao.Items.Refresh();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private void AddRaVao_Click(object sender, RoutedEventArgs e)
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text;
+            GetListChiTietRaVao(searchText);
+        }
+
+        private void AddVehicle_Click(object sender, RoutedEventArgs e)
         {
             AddRaVao dialog = new AddRaVao();
             bool? result = dialog.ShowDialog();
@@ -58,31 +74,16 @@ namespace ParkingManagement.Pages.QuanLyRaVao
 
         private void CapNhatThoiGianRa_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            string maRV = btn.Tag.ToString();
-
-            var filter = Builders<BsonDocument>.Filter.Eq("MaRV", maRV);
-            var update = Builders<BsonDocument>.Update.Set("ThoiGianRa", DateTime.UtcNow);
-
-            DatabaseHandler.Instance.GetCollection("ChiTietRaVao").UpdateOne(filter, update);
-            MessageBox.Show("Thời gian ra đã được cập nhật.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            GetListChiTietRaVao();
+            var button = sender as Button;
+            string maRV = button?.Tag.ToString();
+            // Cập nhật thời gian ra logic ở đây
         }
 
         private void XoaRaVao_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            string maRV = btn.Tag.ToString();
-
-            var filter = Builders<BsonDocument>.Filter.Eq("MaRV", maRV);
-            DatabaseHandler.Instance.GetCollection("ChiTietRaVao").DeleteOne(filter);
-
-            MessageBox.Show("Thông tin ra vào đã được xóa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            GetListChiTietRaVao();
+            var button = sender as Button;
+            string maRV = button?.Tag.ToString();
+            // Xóa logic ở đây
         }
     }
-
-
 }

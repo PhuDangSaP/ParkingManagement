@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="330" Width="430"
+        Height="500" Width="800"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
@@ -15,26 +15,83 @@
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content=" Thêm ra/vào" Style="{StaticResource TitleLabel}"/>
-            <StackPanel Grid.Row="1" Margin="50 10 " Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Mã ra/vào" Style="{StaticResource NormalLabel}" Width="120"></Label>
-                    <TextBox x:Name="MaRaVaoTB" Style="{StaticResource InputTextBox}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                    <Label Content="Mã bãi đỗ" Style="{StaticResource NormalLabel}" Width="120"></Label>
-                    <TextBox x:Name="MaBaiDoTB" Style="{StaticResource InputTextBox}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 20">
-                    <Label Content="Loại xe" Style="{StaticResource NormalLabel}" Width="120"></Label>
-                    <ComboBox x:Name="LoaiXeCBB" Width="200"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Biển số xe" Style="{StaticResource NormalLabel}" Width="120"></Label>
-                    <TextBox x:Name="BienSoXeTB" Style="{StaticResource InputTextBox}"/>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 15">
+
+            <!-- Tiêu đề -->
+            <Label Grid.Row="0" Content=" Thêm ra/vào" Style="{StaticResource TitleLabel}" HorizontalAlignment="Center" Margin="0 10"/>
+
+            <!-- Nội dung chính -->
+            <ScrollViewer Grid.Row="1" Margin="20 10" HorizontalScrollBarVisibility="Disabled">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Thông tin xe -->
+                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0 0 0 0">
+                        <Label Content="Thông tin xe" Style="{StaticResource NormalLabel}" FontSize="30" Margin="0 0 0 10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã ra/vào" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaRaVaoTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Loại xe" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <ComboBox x:Name="LoaiXeCBB" Width="200"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Biển số xe" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="BienSoXeTB" Style="{StaticResource InputTextBox}" LostFocus="BienSoXeTB_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã xe" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaXeTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Name="bdSP" Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã bãi đỗ" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaBDTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="vtdSP" Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã vị trí đỗ" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaVTDTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Thông tin khách hàng -->
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="30 0 0 0">
+                        <Label Content="Thông tin khách hàng" Style="{StaticResource NormalLabel}" FontSize="30" Margin="0 0 0 10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Mã khách hàng" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="MaKhachHangTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Họ tên" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="HoTenTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Giới tính" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <ComboBox x:Name="GioiTinhCBB" Width="200">
+                                <ComboBoxItem Content="Nam"/>
+                                <ComboBoxItem Content="Nữ"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Địa chỉ" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="DiaChiTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="SĐT" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="SDTTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="CCCD" Style="{StaticResource NormalLabel}" Width="120"/>
+                            <TextBox x:Name="CCCDTB" Style="{StaticResource InputTextBox}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Nút hành động -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 15">
                 <Button Content="Hủy" Style="{StaticResource CloseButton}" Click="Huy_Click"/>
                 <Button Content="Thêm" Style="{StaticResource CloseButton}" Margin="20 0" Click="AddRaVao_Click"/>
             </StackPanel>
